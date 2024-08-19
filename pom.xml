@@ -64,7 +64,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.heroku.sdk</groupId>
 				<artifactId>heroku-maven-plugin</artifactId>
 				<version>3.0.7</version>
@@ -76,7 +76,7 @@
 					<jdkVersion>22</jdkVersion>
 				</configuration>
 
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 
