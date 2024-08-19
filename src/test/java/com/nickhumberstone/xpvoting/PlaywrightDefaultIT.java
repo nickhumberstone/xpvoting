@@ -16,7 +16,6 @@ import com.microsoft.playwright.options.AriaRole;
 import java.nio.file.Paths;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-
 public class PlaywrightDefaultIT {
 
     @LocalServerPort
@@ -48,6 +47,14 @@ public class PlaywrightDefaultIT {
         assertThat(page
                 .getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("XP Voting")))
+                .isVisible();
+    }
+
+    @Test
+    void shouldHaveSubHeading() {
+        assertThat(page
+                .getByRole(AriaRole.HEADING,
+                        new Page.GetByRoleOptions().setName("Proposed topic titles")))
                 .isVisible();
     }
 }
