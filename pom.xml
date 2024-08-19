@@ -64,20 +64,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- <plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>3.0.7</version>
-				<configuration>
-					<processTypes>
-						<web>java $JAVA_OPTS -cp target/classes:target/dependency/*
-							XPVotingApplication</web>
-					</processTypes>
-					<jdkVersion>22</jdkVersion>
-				</configuration>
-
-			</plugin> -->
 		</plugins>
 	</build>
-
 </project>
