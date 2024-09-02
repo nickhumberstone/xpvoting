@@ -1,4 +1,4 @@
-package com.nickhumberstone.xpvoting;
+package com.nickhumberstone.xpvoting.acceptance;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,7 +16,7 @@ import com.microsoft.playwright.options.AriaRole;
 import java.nio.file.Paths;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class PlaywrightDefaultIT {
+public class UiAcceptanceTests {
 
     @LocalServerPort
     private Integer port;
