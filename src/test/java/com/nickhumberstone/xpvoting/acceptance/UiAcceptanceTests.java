@@ -57,4 +57,11 @@ public class UiAcceptanceTests {
                         new Page.GetByRoleOptions().setName("Proposed topic titles")))
                 .isVisible();
     }
+
+    @Test
+    void shouldBeAbleToProposeAndViewProposal() {
+        page.getByLabel("Proposal").fill("XTC is cool");
+        page.getByRole(AriaRole.BUTTON).click();
+        assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible();
+    }
 }
