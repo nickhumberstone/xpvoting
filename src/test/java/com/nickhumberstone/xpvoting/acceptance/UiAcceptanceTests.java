@@ -1,5 +1,9 @@
 package com.nickhumberstone.xpvoting.acceptance;
 
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -7,16 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.*;
-import com.microsoft.playwright.options.AriaRole;
-
 import java.nio.file.Paths;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UiAcceptanceTests {
+class UiAcceptanceTests {
 
     @LocalServerPort
     private Integer port;
@@ -61,7 +61,7 @@ public class UiAcceptanceTests {
     @Test
     void shouldBeAbleToProposeAndViewProposal() {
         page.getByLabel("Proposal").fill("XTC is cool");
-        page.getByRole(AriaRole.BUTTON).click();
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
         assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible();
     }
 }
