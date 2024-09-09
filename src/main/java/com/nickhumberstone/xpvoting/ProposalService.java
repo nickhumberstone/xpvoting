@@ -2,10 +2,14 @@
 package com.nickhumberstone.xpvoting;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 
 import java.util.Collections;
 
+@Service
 public class ProposalService {
     List<String> proposals = new ArrayList<>();
 

@@ -8,4 +8,8 @@ public class Proposals {
         return proposal;
     }
 
+    public void setProposal(String proposal) {
+        this.proposal = proposal;
+    }
+
 }

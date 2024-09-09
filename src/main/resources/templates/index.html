@@ -10,12 +10,22 @@
 
 <body>
     <h1>XP Voting</h1>
-    <h2>Proposed topic titles</h2>
-
+    
     <form action="#" th:action="@{/}" th:object="${proposals}" method="post">
-    	<label>Proposal: <input type="text" th:field="*{proposal}" /></label>
+        <label>Proposal: <input type="text" th:field="*{proposal}" /></label>
         <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
     </form>
+    
+    <h2>Proposed topic titles</h2>
+    <ul>
+        <li th:if="${proposalslist.empty}">No topics yet</li>
+        <li th:each="proposal : ${proposalslist}" th:text="${proposalslist}">
+        </li>
+
+
+
+        <!-- Space for list of topics  -->
+    </ul>
 
 </body>
 

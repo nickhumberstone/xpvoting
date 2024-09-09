@@ -9,3 +9,7 @@ Mon Sep 02 20:55:29 BST 2024
 There was an unexpected error (type=Method Not Allowed, status=405).
 Method 'POST' is not supported.
 org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported
+
+Mon 9 Sep
+Need to fix the list display so each list item isn't the entire list of topics, and is instead one topic of all of them
+Need to add proper CI/CD automated testing
