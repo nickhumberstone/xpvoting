@@ -1,12 +1,11 @@
 package com.nickhumberstone.xpvoting.acceptance;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.AriaRole;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -21,14 +20,16 @@ class UiAcceptanceTests {
     @LocalServerPort
     private Integer port;
 
-    private static Page page;
-    private static Playwright playwright;
+    static Playwright playwright;
+    static Browser browser;
+
+    BrowserContext context;
+    Page page;
 
     @BeforeAll
-    static void launchInstance() {
+    static void launchBrowser() {
         playwright = Playwright.create();
-        Browser browser = playwright.webkit().launch();
-        page = browser.newPage();
+        browser = playwright.chromium().launch();
     }
 
     @AfterAll
@@ -36,9 +37,21 @@ class UiAcceptanceTests {
         playwright.close();
     }
 
-    @Test
-    void shouldScreenshot() {
+    @BeforeEach
+    void createContextAndPage() {
+        context = browser.newContext();
+        page = context.newPage();
         page.navigate("http://localhost:" + port);
+    }
+
+    @AfterEach
+    void closeContext() {
+        context.close();
+    }
+
+    @Test
+    @Disabled("prevent every commit containing a new PNG")
+    void shouldScreenshot() {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
     }
 
