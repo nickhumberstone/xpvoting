@@ -93,4 +93,14 @@ class UiAcceptanceTests {
                 () -> assertThat(page.getByRole(AriaRole.LISTITEM)
                         .and(page.getByText("Topic 2", new Page.GetByTextOptions().setExact(true)))).isVisible());
     }
+
+    @Test
+    @Disabled("Incomplete - two forms on one index.html causing clashes")
+    void shouldBeAbleToClearProposals() {
+        page.getByLabel("Proposal").fill("Topic 1");
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        page.getByLabel("Password").fill("XTC2024");
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Clear Proposals")).click();
+        assertThat(page.getByText("No topics yet")).isVisible();
+    }
 }
