@@ -9,22 +9,21 @@
 </head>
 
 <body>
-    <h1>XP Voting</h1>
-    
-    <form action="#" th:action="@{/}" th:object="${proposals}" method="post">
-        <label>Proposal: <input type="text" th:field="*{proposal}" /></label>
-        <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-    </form>
-    
-    <h2>Proposed topic titles</h2>
-    <ul th:each="proposal : ${proposalslist}">
-        <li th:if="${proposalslist.empty}">No topics yet</li>
-        <li th:text="${proposal}">
-        </li>
-    </ul>
+<h1>XP Voting</h1>
 
+<form action="#" th:action="@{/}" th:object="${proposals}" method="post">
+    <label>Proposal: <input type="text" th:field="*{proposal}"/></label>
+    <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+</form>
+
+<h2>Proposed topic titles</h2>
+<ul th:each="proposal : ${proposalslist}">
+    <li th:text="${proposal}">
+    </li>
+</ul>
+<ul th:if="${proposalslist.empty}">
+    <li>No topics yet</li>
+</ul>
 </body>
-
-
 
 </html>
