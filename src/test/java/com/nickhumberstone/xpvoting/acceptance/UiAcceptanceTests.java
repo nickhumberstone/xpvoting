@@ -13,6 +13,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.nio.file.Paths;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class UiAcceptanceTests {
@@ -75,6 +76,21 @@ class UiAcceptanceTests {
     void shouldBeAbleToProposeAndViewProposal() {
         page.getByLabel("Proposal").fill("XTC is cool");
         page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
-        assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible();
+        assertAll(
+                () -> assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible(),
+                () -> assertThat(page.getByLabel("Proposal")).isEmpty());
+    }
+
+    @Test
+    void shouldBeAbleToSeeProposalsAsSeparateListItems() {
+        page.getByLabel("Proposal").fill("Topic 1");
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        page.getByLabel("Proposal").fill("Topic 2");
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        assertAll(
+                () -> assertThat(page.getByRole(AriaRole.LISTITEM)
+                        .and(page.getByText("Topic 1", new Page.GetByTextOptions().setExact(true)))).isVisible(),
+                () -> assertThat(page.getByRole(AriaRole.LISTITEM)
+                        .and(page.getByText("Topic 2", new Page.GetByTextOptions().setExact(true)))).isVisible());
     }
 }

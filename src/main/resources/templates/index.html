@@ -17,14 +17,10 @@
     </form>
     
     <h2>Proposed topic titles</h2>
-    <ul>
+    <ul th:each="proposal : ${proposalslist}">
         <li th:if="${proposalslist.empty}">No topics yet</li>
-        <li th:each="proposal : ${proposalslist}" th:text="${proposalslist}">
+        <li th:text="${proposal}">
         </li>
-
-
-
-        <!-- Space for list of topics  -->
     </ul>
 
 </body>
