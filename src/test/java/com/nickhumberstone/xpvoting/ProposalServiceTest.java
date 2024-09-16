@@ -26,4 +26,11 @@ class ProposalServiceTest {
         service.addProposal("Proposal B");
         assertThat(service.proposals()).contains("Proposal A", "Proposal B");
     }
+
+    @Test
+    void should_be_able_to_clear_proposals() {
+        service.addProposal("I'm not empty");
+        service.clearProposals();
+        assertThat(service.proposals()).isEmpty();
+    }
 }

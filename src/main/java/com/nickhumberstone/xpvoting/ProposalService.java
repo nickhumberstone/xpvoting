@@ -22,4 +22,8 @@ public class ProposalService {
         proposals.add(proposal);
     }
 
+    public void clearProposals() {
+        proposals.clear();
+    }
+
 }
