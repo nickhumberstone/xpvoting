@@ -4,6 +4,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Request;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,6 +93,23 @@ class UiAcceptanceTests {
                         .and(page.getByText("Topic 1", new Page.GetByTextOptions().setExact(true)))).isVisible(),
                 () -> assertThat(page.getByRole(AriaRole.LISTITEM)
                         .and(page.getByText("Topic 2", new Page.GetByTextOptions().setExact(true)))).isVisible());
+    }
+
+    @Disabled("Refactor other tests before implementing this")
+    @Test
+    void newTopicSubmissionShouldDisplayWithoutRefresh() {
+        // Create secondary tab
+        Page page2 = context.newPage();
+        page2.waitForRequest("http://localhost:" + port.toString(), () -> {
+            // Triggers the request
+            // Submit form in first tab to add topic (happens after secondary tab loaded)
+            page.getByLabel("Proposal").fill("Topic Refreshes");
+            page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+            // Check if topic added is visible in the secondary tab (without refreshing)
+
+        });
+        assertThat(page2.getByRole(AriaRole.LISTITEM)
+                .and(page2.getByText("Topic Refreshes", new Page.GetByTextOptions().setExact(true)))).isVisible();
     }
 
     @Test
