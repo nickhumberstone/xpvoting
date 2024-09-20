@@ -65,11 +65,7 @@ class UiAcceptanceTests {
     void shouldBeAbleToSeeProposalsAsSeparateListItems() {
         submitProposal("Topic 1");
         submitProposal("Topic 2");
-        assertAll(
-                () -> assertThat(page.getByRole(AriaRole.LISTITEM)
-                        .and(page.getByText("Topic 1", new Page.GetByTextOptions().setExact(true)))).isVisible(),
-                () -> assertThat(page.getByRole(AriaRole.LISTITEM)
-                        .and(page.getByText("Topic 2", new Page.GetByTextOptions().setExact(true)))).isVisible());
+        assertThat(page.locator("ul")).hasText(new String[] { "Topic 1", "Topic 2" });
     }
 
     @Disabled("Refactor other tests before implementing this")
