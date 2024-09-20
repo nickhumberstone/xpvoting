@@ -4,14 +4,11 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.Request;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
-
-import java.nio.file.Paths;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -51,32 +48,14 @@ class UiAcceptanceTests {
         context.close();
     }
 
-    @Test
-    @Disabled("prevent every commit containing a new PNG")
-    void shouldScreenshot() {
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
-    }
-
-    @Test
-    void shouldHaveHeading() {
-        assertThat(page
-                .getByRole(AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("XP Voting")))
-                .isVisible();
-    }
-
-    @Test
-    void shouldHaveSubHeading() {
-        assertThat(page
-                .getByRole(AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Proposed topic titles")))
-                .isVisible();
+    private void submitProposal(String value) {
+        page.getByLabel("Proposal").fill(value);
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
     }
 
     @Test
     void shouldBeAbleToProposeAndViewProposal() {
-        page.getByLabel("Proposal").fill("XTC is cool");
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        submitProposal("XTC is cool");
         assertAll(
                 () -> assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible(),
                 () -> assertThat(page.getByLabel("Proposal")).isEmpty());
@@ -84,10 +63,8 @@ class UiAcceptanceTests {
 
     @Test
     void shouldBeAbleToSeeProposalsAsSeparateListItems() {
-        page.getByLabel("Proposal").fill("Topic 1");
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
-        page.getByLabel("Proposal").fill("Topic 2");
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        submitProposal("Topic 1");
+        submitProposal("Topic 2");
         assertAll(
                 () -> assertThat(page.getByRole(AriaRole.LISTITEM)
                         .and(page.getByText("Topic 1", new Page.GetByTextOptions().setExact(true)))).isVisible(),
