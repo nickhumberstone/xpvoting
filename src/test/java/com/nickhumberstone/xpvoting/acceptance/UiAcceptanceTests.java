@@ -59,9 +59,8 @@ class UiAcceptanceTests {
     @AfterEach
     void closeContext() {
         context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("trace.zip")));
+                .setPath(Paths.get("target/playwright/trace.zip")));
         context.close();
-        proposalService.clearProposals();
     }
 
     private void submitProposal(String value) {

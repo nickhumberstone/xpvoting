@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocumentXP</title>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
 </head>
 
 <body>
@@ -17,13 +18,7 @@
 </form>
 
 <h2>Proposed topic titles</h2>
-<ul th:each="proposal : ${proposalslist}">
-    <li th:text="${proposal}">
-    </li>
-</ul>
-<ul th:if="${proposalslist.empty}">
-    <li>No topics yet</li>
-</ul>
+<div th:replace="proposal-list.html"></div>
 
 <!-- <form action="#" th:action="@{/clear}" th:object="${password}" method="post">
     <label>Password: <input type="text" th:field="*{password}"/></label>

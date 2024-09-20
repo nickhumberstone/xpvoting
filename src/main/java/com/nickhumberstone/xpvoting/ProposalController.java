@@ -22,6 +22,12 @@ public class ProposalController {
         return "index";
     }
 
+    @GetMapping("/proposalslist")
+    public String proposalslist(Model model) {
+        model.addAttribute("proposalslist", proposalservice.proposals());
+        return "proposal-list";
+    }
+
     @PostMapping("/")
     public String submitProposal(@ModelAttribute Proposals proposal, Model model) {
         String proposal2 = proposal.getProposal();

@@ -1,0 +1,13 @@
+<div
+  hx-get="/proposalslist"
+  hx-trigger="every 1000ms"
+  hx-target="this"
+  hx-swap="outerHTML"
+>
+  <ul th:each="proposal : ${proposalslist}">
+    <li th:text="${proposal}"></li>
+  </ul>
+  <ul th:if="${proposalslist.empty}">
+    <li>No topics yet</li>
+  </ul>
+</div>
