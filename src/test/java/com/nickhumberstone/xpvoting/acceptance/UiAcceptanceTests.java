@@ -80,8 +80,7 @@ class UiAcceptanceTests {
         page2.waitForRequest("http://localhost:" + port.toString(), () -> {
             // Triggers the request
             // Submit form in first tab to add topic (happens after secondary tab loaded)
-            page.getByLabel("Proposal").fill("Topic Refreshes");
-            page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+            submitProposal("Topic Refreshes");
             // Check if topic added is visible in the secondary tab (without refreshing)
 
         });
@@ -92,8 +91,7 @@ class UiAcceptanceTests {
     @Test
     @Disabled("Incomplete - two forms on one index.html causing clashes")
     void shouldBeAbleToClearProposals() {
-        page.getByLabel("Proposal").fill("Topic 1");
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Submit")).click();
+        submitProposal("Topic 1");
         page.getByLabel("Password").fill("XTC2024");
         page.getByRole(AriaRole.BUTTON).and(page.getByText("Clear Proposals")).click();
         assertThat(page.getByText("No topics yet")).isVisible();
