@@ -4,14 +4,20 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Tracing;
 import com.microsoft.playwright.options.AriaRole;
+import com.nickhumberstone.xpvoting.ProposalService;
+
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
+import java.nio.file.Paths;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class UiAcceptanceTests {
@@ -24,6 +30,9 @@ class UiAcceptanceTests {
 
     BrowserContext context;
     Page page;
+
+    @Autowired
+    ProposalService proposalService;
 
     @BeforeAll
     static void launchBrowser() {
@@ -39,13 +48,20 @@ class UiAcceptanceTests {
     @BeforeEach
     void createContextAndPage() {
         context = browser.newContext();
+        context.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
         page = context.newPage();
         page.navigate("http://localhost:" + port);
     }
 
     @AfterEach
     void closeContext() {
+        context.tracing().stop(new Tracing.StopOptions()
+                .setPath(Paths.get("trace.zip")));
         context.close();
+        proposalService.clearProposals();
     }
 
     private void submitProposal(String value) {
@@ -68,20 +84,14 @@ class UiAcceptanceTests {
         assertThat(page.locator("ul")).hasText(new String[] { "Topic 1", "Topic 2" });
     }
 
-    @Disabled("Refactor other tests before implementing this")
     @Test
     void newTopicSubmissionShouldDisplayWithoutRefresh() {
         // Create secondary tab
         Page page2 = context.newPage();
-        page2.waitForRequest("http://localhost:" + port.toString(), () -> {
-            // Triggers the request
-            // Submit form in first tab to add topic (happens after secondary tab loaded)
-            submitProposal("Topic Refreshes");
-            // Check if topic added is visible in the secondary tab (without refreshing)
-
-        });
-        assertThat(page2.getByRole(AriaRole.LISTITEM)
-                .and(page2.getByText("Topic Refreshes", new Page.GetByTextOptions().setExact(true)))).isVisible();
+        page2.navigate("http://localhost:" + port);
+        assertThat(page2.locator("ul")).hasText("No topics yet");
+        submitProposal("Topic Refreshes");
+        assertThat(page2.locator("ul")).hasText("Topic Refreshes");
     }
 
     @Test
