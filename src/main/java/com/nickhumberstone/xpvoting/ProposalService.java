@@ -4,6 +4,9 @@ package com.nickhumberstone.xpvoting;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.assertj.core.api.AbstractIterableAssert;
+import org.assertj.core.api.ListAssert;
+import org.assertj.core.api.ObjectAssert;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +28,10 @@ public class ProposalService {
 
     public void clearProposals() {
         proposals.clear();
+    }
+
+    public List<Proposal> proposalsNEW() {
+        return List.of(new Proposal("Proposal 1"));
     }
 
 }

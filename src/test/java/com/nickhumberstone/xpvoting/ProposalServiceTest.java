@@ -18,6 +18,7 @@ class ProposalServiceTest {
         service.addProposal("Proposal 1");
         // expect our proposal to be in the list
         assertThat(service.proposals()).contains("Proposal 1");
+        assertThat(service.proposalsNEW()).contains(new Proposal("Proposal 1"));
     }
 
     @Test
