@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.nio.file.Paths;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class UiAcceptanceTests {
+class UiAcceptanceIT {
 
     @LocalServerPort
     private Integer port;

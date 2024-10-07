@@ -16,6 +16,7 @@ import java.util.Collections;
 @Service
 public class ProposalService {
     List<String> proposals = new CopyOnWriteArrayList<>();
+    List<Proposal> proposalslisttest = new CopyOnWriteArrayList<>();
 
     public List<String> proposals() {
         // return proposals;
@@ -24,6 +25,7 @@ public class ProposalService {
 
     public void addProposal(String proposal) {
         proposals.add(proposal);
+        proposalslisttest.add(new Proposal(proposal));
     }
 
     public void clearProposals() {
@@ -31,7 +33,7 @@ public class ProposalService {
     }
 
     public List<Proposal> proposalsNEW() {
-        return List.of(new Proposal("Proposal 1"));
+        return Collections.unmodifiableList(proposalslisttest);
     }
 
 }
