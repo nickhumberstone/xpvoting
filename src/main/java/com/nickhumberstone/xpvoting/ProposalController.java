@@ -1,5 +1,7 @@
 package com.nickhumberstone.xpvoting;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,20 +19,22 @@ public class ProposalController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("proposals", new Proposals());
-        model.addAttribute("proposalslist", proposalservice.proposals());
+        List<Proposal> proposalslist = proposalservice.proposals();
+        model.addAttribute("proposalsForm", new ProposalsForm());
+        model.addAttribute("proposalslist", proposalslist.stream().map(Proposal::getTopicTitle).toList());
         return "index";
     }
 
     @GetMapping("/proposalslist")
     public String proposalslist(Model model) {
-        model.addAttribute("proposalslist", proposalservice.proposals());
+        List<Proposal> proposalslist = proposalservice.proposals();
+        model.addAttribute("proposalslist", proposalslist.stream().map(Proposal::getTopicTitle).toList());
         return "proposal-list";
     }
 
     @PostMapping("/")
-    public String submitProposal(@ModelAttribute Proposals proposal, Model model) {
-        String proposal2 = proposal.getProposal();
+    public String submitProposal(@ModelAttribute ProposalsForm proposalsform, Model model) {
+        String proposal2 = proposalsform.getTopicTitle();
         proposalservice.addProposal(proposal2);
         return "redirect:/";
     }

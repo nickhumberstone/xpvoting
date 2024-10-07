@@ -13,3 +13,7 @@ org.springframework.web.HttpRequestMethodNotSupportedException: Request method '
 Mon 9 Sep
 Need to fix the list display so each list item isn't the entire list of topics, and is instead one topic of all of them
 Need to add proper CI/CD automated testing
+
+Mon 7 Oct
+Proposals are an object that have a topicTitle and a voting score
+Thymeleaf should be just a presentation layer -

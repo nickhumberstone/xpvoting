@@ -11,8 +11,13 @@
   <body>
     <h1>XP Voting</h1>
 
-    <form action="#" th:action="@{/}" th:object="${proposals}" method="post">
-      <label>Proposal: <input type="text" th:field="*{proposal}" /></label>
+    <form
+      action="#"
+      th:action="@{/}"
+      th:object="${proposalsForm}"
+      method="post"
+    >
+      <label>Proposal: <input type="text" th:field="*{topicTitle}" /></label>
       <input type="submit" value="Submit" />
       <input type="reset" value="Reset" />
     </form>
