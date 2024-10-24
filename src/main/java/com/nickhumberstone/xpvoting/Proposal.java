@@ -7,17 +7,9 @@ import lombok.Data;
 @Data
 public class Proposal {
     private final String topicTitle;
-    // private final int id;
-
-    public Proposal(String topicTitle) {
-        this.topicTitle = topicTitle;
-    }
+    private final int id;
 
     public int votes() {
-        return 0;
-    }
-
-    public int id() {
         return 0;
     }
 
