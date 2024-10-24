@@ -2,6 +2,7 @@ package com.nickhumberstone.xpvoting;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ProposalServiceTest {
@@ -19,6 +20,7 @@ class ProposalServiceTest {
         // expect our proposal to be in the list
         // assertThat(service.proposals()).contains("Proposal 1");
         assertThat(service.proposals()).contains(new Proposal("Proposal 1"));
+
     }
 
     @Test
@@ -34,4 +36,12 @@ class ProposalServiceTest {
         service.clearProposals();
         assertThat(service.proposals()).isEmpty();
     }
+
+    @Test
+    void can_see_votes_on_proposal() {
+        int proposalId = service.addProposal("Proposal Test");
+        // assert that proposal called X has 1 vote
+        assertThat(service.votesFor(proposalId)).isZero();
+    }
+
 }
