@@ -17,3 +17,8 @@ Need to add proper CI/CD automated testing
 Mon 7 Oct
 Proposals are an object that have a topicTitle and a voting score
 Thymeleaf should be just a presentation layer -
+
+24 Oct 
+Added voting backend implementation, need to add frontend for this. Buttons to trigger the vote increase, display of the vote numbers
+When do we add style? (Times New Roman is too classy for us - comic sans is the way to go!)
+Need to add test - what happens when a proposal is not found? 
