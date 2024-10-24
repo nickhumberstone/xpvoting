@@ -8,9 +8,10 @@ import lombok.Data;
 public class Proposal {
     private final String topicTitle;
     private final int id;
+    private int votes;
 
-    public int votes() {
-        return 0;
+    public void increaseVote() {
+        votes++;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.nickhumberstone.xpvoting;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -42,16 +41,24 @@ class ProposalServiceTest {
     @Test
     void can_see_votes_on_proposal() {
         int proposalId = service.addProposal("Proposal Test");
-        // assert that proposal called X has 1 vote
         assertThat(service.votesFor(proposalId)).isZero();
     }
 
     @Test
-    @Disabled
     void ids_should_not_repeat() {
         int idOfA = service.addProposal("Proposal A");
         int idOfB = service.addProposal("Proposal B");
         assertThat(idOfA).isNotEqualTo(idOfB);
     }
 
+    @Test
+    void should_be_able_to_add_vote() {
+        int proposalIdOfA = service.addProposal("Proposal A");
+        int proposalIdOfB = service.addProposal("Proposal B");
+        service.castVote(proposalIdOfA);
+        service.castVote(proposalIdOfA);
+        service.castVote(proposalIdOfB);
+        assertThat(service.votesFor(proposalIdOfA)).isEqualTo(2);
+        assertThat(service.votesFor(proposalIdOfB)).isEqualTo(1);
+    }
 }

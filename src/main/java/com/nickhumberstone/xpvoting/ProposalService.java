@@ -14,8 +14,9 @@ public class ProposalService {
     List<Proposal> proposalslisttest = new CopyOnWriteArrayList<>();
 
     public int addProposal(String proposal) {
-        proposalslisttest.add(new Proposal(proposal, proposalslisttest.size()));
-        return 0;
+        int id = proposalslisttest.size();
+        proposalslisttest.add(new Proposal(proposal, id));
+        return id;
     }
 
     public void clearProposals() {
@@ -33,7 +34,16 @@ public class ProposalService {
                 .filter(proposal -> proposal.getId() == proposalId)
                 .findAny();
         // return either proposal.votes() or 0 if proposal not present
-        return proposalOptional.orElseThrow().votes();
+        return proposalOptional.orElseThrow().getVotes();
+    }
+
+    public void castVote(int proposalId) {
+        // find item in list matching index, then increase vote value by 1
+        // call the increaseVote function on that item
+        Optional<Proposal> proposalOptional = proposalslisttest.stream()
+                .filter(proposal -> proposal.getId() == proposalId)
+                .findAny();
+        proposalOptional.orElseThrow().increaseVote();
     }
 
 }
