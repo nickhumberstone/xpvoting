@@ -2,12 +2,14 @@ package com.nickhumberstone.xpvoting.acceptance;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Tracing;
 import com.microsoft.playwright.options.AriaRole;
 import com.nickhumberstone.xpvoting.ProposalService;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.nio.file.Paths;
+import java.util.List;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class UiAcceptanceIT {
@@ -97,22 +100,35 @@ class UiAcceptanceIT {
     }
 
     @Test
-    @Disabled
     void shouldBeAbleToVoteAndSeeVoteNumberIncrease() {
+        submitProposal("Topic 0");
         submitProposal("Topic 1");
         // now we have a table with a topic and vote score of 0 displayed, and a vote
         // button
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Vote")).click();
-        assertThat(page.getByRole(AriaRole.CELL)).hasText(new String[] { "Topic 1", "Topic 2" });
+
+        // Locator tableLocator = page.locator("table#example tbody");
+        // List<String> nthRow =
+        // tableLocator.locator("tr").nth(1).locator(":scope").allInnerTexts();
+        // Assertions.assertThat(nthRow).anyMatch(a -> a.contains("Topic 1"));
+        Locator row = page.getByRole(AriaRole.ROW)
+                .filter(new Locator.FilterOptions().setHasText("Topic 1"));
+
+        row.getByRole(AriaRole.BUTTON).click();
+
+        assertThat(row).containsText("1 Votes");
+
+        // page.getByRole(AriaRole.BUTTON).and(page.getByText("Vote")).click();
+        // assertThat(page.getByRole(AriaRole.CELL)).getByText("1 Vote"))).isVisible();
     }
 
-    @Test
-    @Disabled("Incomplete - two forms on one index.html causing clashes")
-    void shouldBeAbleToClearProposals() {
-        submitProposal("Topic 1");
-        page.getByLabel("Password").fill("XTC2024");
-        page.getByRole(AriaRole.BUTTON).and(page.getByText("Clear Proposals")).click();
-        assertThat(page.getByText("No topics yet")).isVisible();
-    }
+    // @Test
+    // @Disabled("Incomplete - two forms on one index.html causing clashes")
+    // void shouldBeAbleToClearProposals() {
+    // submitProposal("Topic 1");
+    // page.getByLabel("Password").fill("XTC2024");
+    // page.getByRole(AriaRole.BUTTON).and(page.getByText("Clear
+    // Proposals")).click();
+    // assertThat(page.getByText("No topics yet")).isVisible();
+    // }
 
 }

@@ -6,7 +6,7 @@
 >
 
 <div th:if="${proposalslist.empty}"><p>No topics yet</p></div>
-  <table th:each="proposal : ${proposalslist}">
+  <table id="example" th:each="proposal : ${proposalslist}">
 <tr>
   <td th:text="${proposal}">
   </td>
