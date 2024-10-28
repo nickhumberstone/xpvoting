@@ -6,16 +6,21 @@
 >
 
 <div th:if="${proposalslist.empty}"><p>No topics yet</p></div>
+<form
+method="post"
+>
   <table id="example" th:each="proposal : ${proposalslist}">
-<tr>
-  <td th:text="${proposal}">
-  </td>
-  <td th:text="${votesTotal}">
-  </td>
-  <td>
-   <button>Vote</button> <!-- <button th:onPressFunction="${refToID1}">Vote</button> -->
-  </td>
-</tr>
-    
+    <tr>
+      <td th:text="${proposal.topicTitle}">
+      </td>
+      <td th:text="${proposal.votes} + ' Votes'">
+        
+      </td>
+      <td>
+        <button th:attr="formaction=@{'/castvote/' + ${proposal.id}}" method="post">Vote</button>
+      </td>
+    </tr>
+    </table>
+  </form>
   </div>
   
