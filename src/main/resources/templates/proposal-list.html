@@ -4,10 +4,18 @@
   hx-target="this"
   hx-swap="outerHTML"
 >
-  <ul th:each="proposal : ${proposalslist}">
-    <li th:text="${proposal}"></li>
-  </ul>
-  <ul th:if="${proposalslist.empty}">
-    <li>No topics yet</li>
-  </ul>
-</div>
+
+<div th:if="${proposalslist.empty}"><p>No Topics yet</p></div>
+  <table th:each="proposal : ${proposalslist}">
+<tr>
+  <td th:text="${proposal}">
+  </td>
+  <td th:text="${votesTotal}">
+  </td>
+  <td>
+   <button>Vote</button> <!-- <button th:onPressFunction="${refToID1}">Vote</button> -->
+  </td>
+</tr>
+    
+  </div>
+  

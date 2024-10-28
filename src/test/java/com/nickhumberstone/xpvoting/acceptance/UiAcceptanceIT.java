@@ -73,7 +73,7 @@ class UiAcceptanceIT {
     void shouldBeAbleToProposeAndViewProposal() {
         submitProposal("XTC is cool");
         assertAll(
-                () -> assertThat(page.getByRole(AriaRole.LISTITEM).and(page.getByText("XTC is cool"))).isVisible(),
+                () -> assertThat(page.getByRole(AriaRole.CELL).and(page.getByText("XTC is cool"))).isVisible(),
                 () -> assertThat(page.getByLabel("Proposal")).isEmpty());
     }
 
@@ -81,7 +81,9 @@ class UiAcceptanceIT {
     void shouldBeAbleToSeeProposalsAsSeparateListItems() {
         submitProposal("Topic 1");
         submitProposal("Topic 2");
-        assertThat(page.locator("ul")).hasText(new String[] { "Topic 1", "Topic 2" });
+        assertAll(
+                () -> assertThat(page.getByRole(AriaRole.CELL).and(page.getByText("Topic 1"))).isVisible(),
+                () -> assertThat(page.getByRole(AriaRole.CELL).and(page.getByText("Topic 2"))).isVisible());
     }
 
     @Test
@@ -89,9 +91,19 @@ class UiAcceptanceIT {
         // Create secondary tab
         Page page2 = context.newPage();
         page2.navigate("http://localhost:" + port);
-        assertThat(page2.locator("ul")).hasText("No topics yet");
+        assertThat(page2.getByRole(AriaRole.PARAGRAPH).and(page2.getByText("No topics yet"))).isVisible();
         submitProposal("Topic Refreshes");
-        assertThat(page2.locator("ul")).hasText("Topic Refreshes");
+        assertThat(page2.getByRole(AriaRole.CELL).and(page2.getByText("Topic Refreshes"))).isVisible();
+    }
+
+    @Test
+    @Disabled
+    void shouldBeAbleToVoteAndSeeVoteNumberIncrease() {
+        submitProposal("Topic 1");
+        // now we have a table with a topic and vote score of 0 displayed, and a vote
+        // button
+        page.getByRole(AriaRole.BUTTON).and(page.getByText("Vote")).click();
+        assertThat(page.getByRole(AriaRole.CELL)).hasText(new String[] { "Topic 1", "Topic 2" });
     }
 
     @Test
@@ -102,4 +114,5 @@ class UiAcceptanceIT {
         page.getByRole(AriaRole.BUTTON).and(page.getByText("Clear Proposals")).click();
         assertThat(page.getByText("No topics yet")).isVisible();
     }
+
 }
