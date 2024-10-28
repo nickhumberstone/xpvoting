@@ -5,7 +5,7 @@
   hx-swap="outerHTML"
 >
 
-<div th:if="${proposalslist.empty}"><p>No Topics yet</p></div>
+<div th:if="${proposalslist.empty}"><p>No topics yet</p></div>
   <table th:each="proposal : ${proposalslist}">
 <tr>
   <td th:text="${proposal}">
