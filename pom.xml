@@ -20,7 +20,7 @@
 
     <properties>
         <java.version>22</java.version>
-        <playwright.version>1.46.0</playwright.version>
+        <playwright.version>1.48.0</playwright.version>
     </properties>
 
     <dependencies>
