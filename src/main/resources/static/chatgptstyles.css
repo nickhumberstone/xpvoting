@@ -1,0 +1,195 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+    color: #333;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  h1, h2 {
+    color: #4a90e2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], input[type="submit"], input[type="reset"], button {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+  }
+  
+  input[type="submit"], input[type="reset"], button {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    margin-right: 10px;
+  }
+  
+  input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+    background-color: #357ab8;
+  }
+  
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #777;
+  }
+  
+  footer a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    color: #357ab8;
+  }
+  
+  #proposallist {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    margin-top: 15px;
+  }
+  
+  /* Proposal table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    padding: 12px;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: left;
+    overflow-wrap: break-word; /* Allow text to wrap to the next line */
+    word-break: break-word;    /* Break long words if necessary */
+  }
+  
+  /* Apply fixed widths to columns */
+  table th:nth-child(1), table td:nth-child(1) {
+    width: 60%;                /* First column for topic title */
+    max-width: 200px;          /* Limit the width of the first column */
+  }
+  
+  table th:nth-child(2), table td:nth-child(2) {
+    width: 20%;                /* Fixed width for votes column */
+    text-align: center;
+    color: #555;
+    min-width: 70px;          /* Ensure a minimum width */
+  }
+  
+  table th:nth-child(3), table td:nth-child(3) {
+    width: 20%;                /* Fixed width for vote button */
+    text-align: center;
+    min-width: 90px;          /* Ensure a minimum width */
+  }
+  
+  /* Add alternating row colors */
+  tr:nth-child(even) {
+    background-color: #f2f6fc;
+  }
+  
+  tr:hover {
+    background-color: #e6eef9;
+  }
+  
+  /* Styling for buttons in table */
+  button {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #357ab8;
+  }
+  
+  /* Animation for new topics appearing */
+  #proposallist tr {
+    animation: fadeInSlide 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInSlide {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive styling for mobile devices */
+  @media (max-width: 480px) {
+    .card {
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    h1, h2 {
+      font-size: 1.5rem;
+    }
+  
+    input[type="text"], input[type="submit"], input[type="reset"], button {
+      font-size: 1rem;
+      padding: 12px;
+    }
+  
+    table, th, td {
+      font-size: 0.85rem;
+      padding: 10px;
+    }
+  }
+  

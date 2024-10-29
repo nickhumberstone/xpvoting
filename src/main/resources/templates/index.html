@@ -5,41 +5,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocumentXP</title>
+    <link rel="stylesheet" href="./../chatgptstyles.css">
     <script src="https://unpkg.com/htmx.org@2.0.2"></script>
   </head>
 
   <body>
-    <h1>XP Voting</h1>
+    <div class="card">
+      <h1>XP Voting</h1>
+      <p>Type in your topic title to add it to the proposals list</p>
 
-    <form
+      <form id="proposalform"
       action="#"
       th:action="@{/}"
       th:object="${proposalsForm}"
       method="post"
-    >
+      >
       <label>Proposal: <input type="text" th:field="*{topicTitle}" /></label>
       <input type="submit" value="Submit" />
       <input type="reset" value="Reset" />
     </form>
-
+  </div>
+  <div class="card">
     <h2>Proposed topic titles</h2>
 
     
-    <div th:replace="proposal-list.html"></div>
+    <div id="proposallist" th:replace="proposal-list.html"></div>
     
     <!-- <form action="#" th:action="@{/clear}" th:object="${password}" method="post">
       <label>Password: <input type="text" th:field="*{password}"/></label>
       <input type="submit" value="Clear Proposals"/>
     </form> -->
-    <p>
-      XP Voting is an open spaces topic proposal and voting app developed using
-      XP Principles by Andrzej and Nick. Technologies used: Java, HTMX,
-      Thymeleaf, Spring Boot.
-    </p>
-    <p>
-      <a href="https://github.com/nickhumberstone/xpvoting"
+  </div>
+    <footer>
+      <p>
+        XP Voting is an open spaces topic proposal and voting app developed using
+        XP Principles by Andrzej and Nick. Technologies used: Java, HTMX,
+        Thymeleaf, Spring Boot.
+      </p>
+      <p>
+        <a href="https://github.com/nickhumberstone/xpvoting"
         >Find out more on GitHub</a
-      >
-    </p>
+        >
+      </p>
+    </footer>
   </body>
 </html>
