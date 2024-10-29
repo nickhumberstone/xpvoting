@@ -17,21 +17,6 @@
 
     <name>XP Voting</name>
     <description>Voting tool for XP, built with XP</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-
-    <developers>
-        <developer/>
-    </developers>
-
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
 
     <properties>
         <java.version>22</java.version>
