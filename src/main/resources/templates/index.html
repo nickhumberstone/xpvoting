@@ -27,10 +27,7 @@
 </div>
 <div class="card">
     <h2>Proposed topic titles</h2>
-
-
-    <div id="proposallist" th:replace="proposal-list.html"></div>
-
+    <div id="proposallist" th:replace="~{proposal-list.html}"></div>
     <!-- <form action="#" th:action="@{/clear}" th:object="${password}" method="post">
       <label>Password: <input type="text" th:field="*{password}"/></label>
       <input type="submit" value="Clear Proposals"/>
@@ -43,9 +40,7 @@
         Thymeleaf, Spring Boot.
     </p>
     <p>
-        <a href="https://github.com/nickhumberstone/xpvoting"
-        >Find out more on GitHub</a
-        >
+        <a href="https://github.com/nickhumberstone/xpvoting">Find out more on GitHub</a>
     </p>
 </footer>
 </body>
