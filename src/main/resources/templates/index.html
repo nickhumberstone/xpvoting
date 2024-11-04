@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>DocumentXP</title>
     <link href="./../chatgptstyles.css" rel="stylesheet">
-    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <script th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 </head>
 
 <body>
@@ -27,9 +27,7 @@
 </div>
 <div class="card">
     <h2>Proposed topic titles</h2>
-
     <div id="proposallist" th:replace="~{proposal-list.html}"></div>
-
     <!-- <form action="#" th:action="@{/clear}" th:object="${password}" method="post">
       <label>Password: <input type="text" th:field="*{password}"/></label>
       <input type="submit" value="Clear Proposals"/>
