@@ -1,21 +1,14 @@
-<div
-        hx-get="/proposalslist"
-        hx-swap="outerHTML"
-        hx-target="this"
-        hx-trigger="every 1s"
->
+<div hx-get="/proposalslist"
+     hx-swap="outerHTML"
+     hx-target="this"
+     hx-trigger="every 1s">
 
     <div th:if="${proposalslist.isEmpty()}"><p>No topics yet</p></div>
-    <form
-            method="post"
-    >
+    <form method="post">
         <table id="example" th:each="proposal : ${proposalslist}">
             <tr>
-                <td th:text="${proposal.topicTitle}">
-                </td>
-                <td th:text="${proposal.votes} + ' Votes'">
-
-                </td>
+                <td th:text="${proposal.topicTitle}"></td>
+                <td th:text="${proposal.votes} + ' Votes'"></td>
                 <td>
                     <button th:attr="formaction=@{'/castvote/' + ${proposal.id}}">Vote</button>
                 </td>
