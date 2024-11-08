@@ -1,8 +1,8 @@
 package com.nickhumberstone.xpvoting;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ProposalServiceTest {
     ProposalService service = new ProposalService();
@@ -14,12 +14,10 @@ class ProposalServiceTest {
 
     @Test
     void should_be_able_to_add_proposal() {
-        // first add a proposal to the Proposal Service
         service.addProposal("Proposal 1");
-        // expect our proposal to be in the list
-        // assertThat(service.proposals()).contains("Proposal 1");
-        assertThat(service.proposals()).extracting(Proposal::getTopicTitle).contains("Proposal 1");
-
+        assertThat(service.proposals())
+                .extracting(Proposal::getTopicTitle)
+                .contains("Proposal 1");
     }
 
     @Test
