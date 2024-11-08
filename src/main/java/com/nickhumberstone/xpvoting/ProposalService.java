@@ -1,13 +1,11 @@
-
 package com.nickhumberstone.xpvoting;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class ProposalService {
@@ -46,4 +44,11 @@ public class ProposalService {
         proposalOptional.orElseThrow().increaseVote();
     }
 
+    public ProposalDetails detailsFor(int proposalId) {
+        return proposalslisttest.stream()
+                .filter(proposal -> proposal.getId() == proposalId)
+                .findAny()
+                .map(proposal -> new ProposalDetails(proposal.getId(), proposal.getTopicTitle(), proposal.getVotes()))
+                .orElseThrow();
+    }
 }

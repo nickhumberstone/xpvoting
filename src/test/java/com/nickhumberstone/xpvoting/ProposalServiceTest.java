@@ -59,4 +59,15 @@ class ProposalServiceTest {
         assertThat(service.votesFor(proposalIdOfA)).isEqualTo(2);
         assertThat(service.votesFor(proposalIdOfB)).isEqualTo(1);
     }
+
+    @Test
+    void should_get_details_of_a_proposal() {
+        var proposalId = service.addProposal("Something cool");
+        service.castVote(proposalId);
+
+        var proposalDetails = service.detailsFor(proposalId);
+
+        assertThat(proposalDetails)
+                .isEqualTo(new ProposalDetails(proposalId, "Something cool", 1));
+    }
 }
