@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table>
+    <tr th:fragment="proposalRow(proposal)">
+        <td th:text="${proposal.topicTitle}"></td>
+        <td th:text="${proposal.votes} + ' Votes'"></td>
+        <td>
+            <button th:attr="formaction=@{'/castvote/' + ${proposal.id}}">Vote</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
