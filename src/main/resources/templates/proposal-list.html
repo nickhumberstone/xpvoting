@@ -2,7 +2,7 @@
         hx-get="/proposalslist"
         hx-swap="outerHTML"
         hx-target="this"
-        hx-trigger="every 1000ms"
+        hx-trigger="every 1s"
 >
 
     <div th:if="${proposalslist.isEmpty()}"><p>No topics yet</p></div>
