@@ -22,3 +22,15 @@ Thymeleaf should be just a presentation layer -
 Added voting backend implementation, need to add frontend for this. Buttons to trigger the vote increase, display of the vote numbers
 When do we add style? (Times New Roman is too classy for us - comic sans is the way to go!)
 Need to add test - what happens when a proposal is not found? 
+
+8 Nov
+Extracted proposal to a Thymeleaf fragment
+Started htmx-izing proposal voting
+- Added htmx button in parallel
+- Added POST endpoint in parallel
+- Added query for Proposal details to ProposalService
+
+TODO:
+- Update htmx button and its endpoint (returning the content for the table row)
+- Re-evaluate our Ubiquitous Language - add Domain Glossary to README
+- Update README (who uses Tailwind anyway?)

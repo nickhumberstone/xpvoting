@@ -2,7 +2,6 @@ package com.nickhumberstone.xpvoting;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,11 +40,17 @@ public class ProposalController {
         return "redirect:/";
     }
 
+    @PostMapping("/oldCastvote/{id}")
+    public String oldCastVote(@PathVariable int id) {
+        proposalservice.castVote(id);
+        return "redirect:/";
+        // return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/castvote/{id}")
     public String castVote(@PathVariable int id) {
         proposalservice.castVote(id);
         return "redirect:/";
         // return ResponseEntity.ok().build();
     }
-
 }
