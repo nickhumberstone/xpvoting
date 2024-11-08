@@ -1,7 +1,7 @@
 <div hx-get="/proposalslist"
      hx-swap="outerHTML"
      hx-target="this"
-     hx-trigger="every 100s">
+     hx-trigger="every 2s">
 
     <div th:if="${proposalslist.isEmpty()}"><p>No topics yet</p></div>
     <form method="post">
