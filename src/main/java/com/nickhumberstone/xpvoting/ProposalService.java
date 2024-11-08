@@ -48,7 +48,7 @@ public class ProposalService {
         return proposalslisttest.stream()
                 .filter(proposal -> proposal.getId() == proposalId)
                 .findAny()
-                .map(proposal -> new ProposalDetails(proposal.getId(), proposal.getTopicTitle(), proposal.getVotes()))
+                .map(ProposalDetails::proposalDetailsFrom)
                 .orElseThrow();
     }
 }
