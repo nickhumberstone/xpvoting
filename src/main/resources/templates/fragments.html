@@ -2,15 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <table>
+<!-- Above is pointless boilerplate -->
+
     <tr th:fragment="proposalRow(proposal)">
         <td th:text="${proposal.topicTitle}"></td>
         <td th:text="${proposal.votes} + ' Votes'"></td>
         <td>
             <button th:attr="formaction=@{'/oldCastvote/' + ${proposal.id}}">OldVote</button>
             <!-- TODO: Replace button in parallel -->
-            <!-- <button th:attr="hx-post=@{'/castvote/' + ${proposal.id}}">Vote</button>-->
+            <button th:attr="hx-post=@{'/castvote/' + ${proposal.id}}" hx-swap="outerHTML" hx-target="closest tr">Vote</button>
         </td>
     </tr>
+
+<!-- Below is pointless boilerplate -->
 </table>
 </body>
 </html>

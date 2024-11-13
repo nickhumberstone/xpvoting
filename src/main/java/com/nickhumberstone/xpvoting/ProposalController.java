@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProposalController {
@@ -48,9 +50,16 @@ public class ProposalController {
     }
 
     @PostMapping("/castvote/{id}")
-    public String castVote(@PathVariable int id) {
+    public ModelAndView castVote(@PathVariable int id) {
         proposalservice.castVote(id);
-        return "redirect:/";
+        // ask detailsFor(id) the proposal, then return the model
+        ProposalDetails proposalDetails = proposalservice.detailsFor(id);
+        ModelAndView modelAndView = new ModelAndView("fragments::proposalRow");
+        modelAndView.addObject("proposal", proposalDetails);
+        return modelAndView;
+        // return "fragments::proposalRow(id)";
         // return ResponseEntity.ok().build();
     }
+
+    // "~{fragments :: proposalRow(proposal)}"
 }

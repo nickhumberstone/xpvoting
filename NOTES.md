@@ -34,3 +34,5 @@ TODO:
 - Update htmx button and its endpoint (returning the content for the table row)
 - Re-evaluate our Ubiquitous Language - add Domain Glossary to README
 - Update README (who uses Tailwind anyway?)
+
+- Make the button swap-oob just the vote count, not the entire row
