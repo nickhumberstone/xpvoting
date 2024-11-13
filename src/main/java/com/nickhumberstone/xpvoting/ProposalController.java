@@ -42,24 +42,13 @@ public class ProposalController {
         return "redirect:/";
     }
 
-    @PostMapping("/oldCastvote/{id}")
-    public String oldCastVote(@PathVariable int id) {
-        proposalservice.castVote(id);
-        return "redirect:/";
-        // return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/castvote/{id}")
     public ModelAndView castVote(@PathVariable int id) {
         proposalservice.castVote(id);
-        // ask detailsFor(id) the proposal, then return the model
         ProposalDetails proposalDetails = proposalservice.detailsFor(id);
         ModelAndView modelAndView = new ModelAndView("fragments::proposalRow");
         modelAndView.addObject("proposal", proposalDetails);
         return modelAndView;
-        // return "fragments::proposalRow(id)";
-        // return ResponseEntity.ok().build();
     }
 
-    // "~{fragments :: proposalRow(proposal)}"
 }
