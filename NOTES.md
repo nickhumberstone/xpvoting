@@ -30,9 +30,13 @@ Started htmx-izing proposal voting
 - Added POST endpoint in parallel
 - Added query for Proposal details to ProposalService
 
+13 Nov
+Removed old vote button
+Got htmx to target the table row correctly
+Made endpoint return the right model attribute
+
 TODO:
-- Update htmx button and its endpoint (returning the content for the table row)
+- ~~Update htmx button and its endpoint (returning the content for the table row)~~
 - Re-evaluate our Ubiquitous Language - add Domain Glossary to README
 - Update README (who uses Tailwind anyway?)
-
 - Make the button swap-oob just the vote count, not the entire row
