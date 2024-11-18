@@ -10,7 +10,7 @@ public class Proposal {
     private final int id;
     private int votes;
 
-    public void increaseVote() {
+    public synchronized void increaseVote() {
         votes++;
     }
 

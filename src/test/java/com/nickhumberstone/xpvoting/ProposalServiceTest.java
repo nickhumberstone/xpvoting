@@ -1,8 +1,14 @@
 package com.nickhumberstone.xpvoting;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProposalServiceTest {
     ProposalService service = new ProposalService();
@@ -69,5 +75,22 @@ class ProposalServiceTest {
 
         assertThat(proposalDetails)
                 .isEqualTo(new ProposalDetails(proposalId, "Something cool", 1));
+    }
+
+    @RepeatedTest(100)
+    void should_handle_concurrent_votes() throws InterruptedException {
+        service.addProposal("Test Proposal");
+        var proposal = service.proposals().getFirst();
+
+        try (var executorService = Executors.newFixedThreadPool(2)) {
+            for (var i = 0; i < 10; i++) {
+                executorService.submit(() -> service.castVote(proposal.getId()));
+            }
+
+            executorService.shutdown();
+            assertTrue(executorService.awaitTermination(1, TimeUnit.SECONDS));
+        }
+
+        assertEquals(10, proposal.getVotes(), "Votes should be 10 after ten votes");
     }
 }
