@@ -7,7 +7,7 @@
     <form method="post">
         <table id="example">
             <tr th:each="proposal : ${proposalslist}"
-                th:include="fragments :: proposalRow(proposal)">
+                th:insert="~{fragments :: proposalRow(proposal)}">
             </tr>
         </table>
     </form>
