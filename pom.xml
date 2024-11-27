@@ -21,7 +21,7 @@
     <properties>
         <java.version>23</java.version>
         <maven.compiler.proc>full</maven.compiler.proc>
-        <playwright.version>1.48.0</playwright.version>
+        <playwright.version>1.49.0</playwright.version>
         <htmx.org.version>2.0.3</htmx.org.version>
     </properties>
 
