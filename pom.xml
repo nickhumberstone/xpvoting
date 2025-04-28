@@ -23,6 +23,7 @@
         <maven.compiler.proc>full</maven.compiler.proc>
         <playwright.version>1.51.0</playwright.version>
         <htmx.org.version>2.0.4</htmx.org.version>
+        <argLine/>
     </properties>
 
     <dependencies>
