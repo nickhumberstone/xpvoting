@@ -1,4 +1,5 @@
 # XP Voting / [https://XTC.vote](https://XTC.vote)
+[![Java CI with Maven](https://github.com/nickhumberstone/xpvoting/actions/workflows/maven.yml/badge.svg)](https://github.com/nickhumberstone/xpvoting/actions/workflows/maven.yml)
 
 ## What is XTC.vote?
 
