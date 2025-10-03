@@ -19,7 +19,7 @@
     <description>Voting tool for XP, built with XP</description>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
         <maven.compiler.proc>full</maven.compiler.proc>
         <playwright.version>1.55.0</playwright.version>
         <htmx.org.version>2.0.7</htmx.org.version>
